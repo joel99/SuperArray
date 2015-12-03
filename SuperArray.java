@@ -54,8 +54,7 @@ public class SuperArray {
 		
     //double capacity of this SuperArray
     private void expand() { 
-	_size *= 2;
-	int[] newArr = new int[_size];
+	int[] newArr = new int[2 * _data.length];
 	for (int i = 0; i < _lastPos; i++){
 	    newArr[i] = _data[i];
 	}
@@ -83,38 +82,44 @@ public class SuperArray {
   // ~~~~~~~~~~~~~~ PHASE II ~~~~~~~~~~~~~~
     //adds an item after the last item
     public void add( int newVal ) {
+	if (_size == _data.length)
+		expand();
 	_data[_size] = newVal;
 	_size +=1;
-	_lastPos = _size - 1;
+	_lastPos += 1;
     }
 
 
     //inserts an item at index
     //shifts existing elements to the right
     public void add( int index, int newVal ) {
-	for (int i = index + 1;i<_data.length;i++){
-	    int temp = _data[index];
-	    _data[index + 1] = temp;
+	if (index > _size){
+		//Let's throw an error!
+	}
+	if (_size == _data.length)
+		expand();
+	for (int i = _size; i > index + 1; i--){
+	    _data[i] = _data[i - 1];
 	}
 	_data[index] = newVal;
+	_lastPos += 1;
 	_size +=1;
     }
 
 
     //removes the item at index
-    //shifts elements left to fill in newly-empted slot
-    public void remove( int index ) { }
+    //shifts elements left to fill in newly-emptied slot
+    public void remove( int index ) {
+	for (int i = index; i < _lastPos; i++)
+		_data[i] = _data[i + 1];
+	_lastPos -= 1;
+	_size -= 1;
+	}
 
 
     //return number of meaningful items in _data
     public int size() {
-	int ctr = 0;
-	for (int i = 0; i<_data.length-1; i++){
-	    while (_data[_data.length - 1 - i] == 0){
-		ctr +=1;
-	    }
-	}
-	return _data.length - ctr;
+		return _size;
     }
 
 
@@ -134,14 +139,20 @@ public class SuperArray {
 
 	System.out.println("testing get()...");
 	for( int i = 0; i < curtis._size; i++ ) {
-	    System.out.print( "item at index" + i + ":\t" );
+	    System.out.print( "item at index " + i + ":\t" );
 	    System.out.println( curtis.get(i) );
 	}
 	SuperArray bayle = new SuperArray();
+	System.out.println("Printing empty bayle");
+	System.out.println(bayle);
 	for (int i = 0; i < bayle._data.length; i++){
-	    bayle.add(i);
+	    bayle.add(i * 3);
 	}
 	System.out.println("Printing numberified bayle...");
 	System.out.println(bayle);
+	System.out.println("Removing 5th element");
+	bayle.remove(4);
+	System.out.println(bayle);
+	System.out.println(bayle.size());
     }
 }

@@ -93,7 +93,7 @@ public class SuperArray {
     //inserts an item at index
     //shifts existing elements to the right
     public void add( int index, int newVal ) {
-	if (index > _size){
+	if (index >= _size){
 		//Let's throw an error!
 	}
 	if (_size == _data.length)

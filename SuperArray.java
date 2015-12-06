@@ -14,17 +14,17 @@
  *  ability to print meaningfully
  *****************************/
 
-public class SuperArray {
+public class SuperArray implements ListInt {
 
     //~~~~~INSTANCE VARS~~~~~
     //underlying container, or "core" of this data structure:
-    private int[] _data;
+    protected int[] _data;
 
     //position of last meaningful value
-    private int _lastPos;
+    protected int _lastPos;
 
     //size of this instance of SuperArray
-    private int _size;
+    protected int _size;
 
 		
     //~~~~~METHODS~~~~~
@@ -65,10 +65,13 @@ public class SuperArray {
 		
     //accessor -- return value at specified index
     public int get( int index ) { 
-	return _data[index];
-	
+	return _data[index];	
 	}
 
+    //accessor -- return _data length
+    public int get_dataLength() {
+	return _data.length;
+    }
 		
     //mutator -- set value at index to newVal, 
     //           return old value at index
@@ -126,6 +129,8 @@ public class SuperArray {
     //main method for testing
     public static void main( String[] args ) 
     {
+	/*
+	//testing SuperJava methods
 	SuperArray curtis = new SuperArray();
 	System.out.println("Printing empty SuperArray curtis...");
 	System.out.println(curtis);
@@ -154,5 +159,23 @@ public class SuperArray {
 	bayle.remove(4);
 	System.out.println(bayle);
 	System.out.println(bayle.size());
+	*/
+
+	//testing for interface over implementation
+	ListInt daemon = new SuperArray();
+
+	System.out.println("Printing empty daemon");
+	System.out.println(daemon);
+	for (int i = 0; i < 10; i++){ //error with daemon._data.length
+	    daemon.add(i);
+	}
+	System.out.println("Printing numberified daemon...");
+	System.out.println(daemon);
+	System.out.println("Removing 9th element");
+	daemon.remove(8);
+	System.out.println(daemon);
+	System.out.println(daemon.size());
+
+
     }
 }

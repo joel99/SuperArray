@@ -1,7 +1,7 @@
-//Joel Ye and Bayle Smith-Salzberg
+//Joel Ye and Jason Mohabir
 //APCS1 pd10
-//HW40 -- Array of Grade 316
-//2015 - 12 - 02
+//HW42 -- Array of Titanium
+//2015 - 12 - 06
 
 /*****************************
  * SKELETON for
@@ -25,8 +25,7 @@ public class SuperArray implements ListInt {
 
     //size of this instance of SuperArray
     protected int _size;
-
-		
+	
     //~~~~~METHODS~~~~~
     //default constructor – initializes 10-item array
     public SuperArray() {
@@ -34,7 +33,6 @@ public class SuperArray implements ListInt {
 	_lastPos = -1;
 	_size = 0;
     }
-
 		
     //output array in [a,b,c] format, eg
     // {1,2,3}.toString() -> "[1,2,3]"
@@ -44,34 +42,25 @@ public class SuperArray implements ListInt {
 	    s += _data[i];
 	    s += ",";
 	}
-	if (_size > 0){
+	if (_size > 0)
 	    s = s.substring(0,s.length() - 1);
-	}
 	s += "]";
 	return s;
     }
-
 		
     //double capacity of this SuperArray
     private void expand() { 
 	int[] newArr = new int[2 * _data.length];
-	for (int i = 0; i < _lastPos; i++){
+	for (int i = 0; i < _lastPos; i++)
 	    newArr[i] = _data[i];
-	}
 	_data = newArr;
     }
-
-
-		
+	
     //accessor -- return value at specified index
-    public int get( int index ) { 
-	return _data[index];	
-	}
+    public int get( int index ) { return _data[index];}
 
     //accessor -- return _data length
-    public int get_dataLength() {
-	return _data.length;
-    }
+    public int get_dataLength() {return _data.length;}
 		
     //mutator -- set value at index to newVal, 
     //           return old value at index
@@ -79,7 +68,6 @@ public class SuperArray implements ListInt {
 	int temp = _data[index];
 	_data[index] = newVal;
 	return temp;
-	
     }
 
   // ~~~~~~~~~~~~~~ PHASE II ~~~~~~~~~~~~~~
@@ -91,7 +79,6 @@ public class SuperArray implements ListInt {
 	_size +=1;
 	_lastPos += 1;
     }
-
 
     //inserts an item at index
     //shifts existing elements to the right
@@ -109,7 +96,6 @@ public class SuperArray implements ListInt {
 	_size +=1;
     }
 
-
     //removes the item at index
     //shifts elements left to fill in newly-emptied slot
     public void remove( int index ) {
@@ -119,48 +105,12 @@ public class SuperArray implements ListInt {
 	_size -= 1;
 	}
 
-
     //return number of meaningful items in _data
-    public int size() {
-		return _size;
-    }
-
+    public int size() {return _size;}
 
     //main method for testing
     public static void main( String[] args ) 
     {
-	/*
-	//testing SuperJava methods
-	SuperArray curtis = new SuperArray();
-	System.out.println("Printing empty SuperArray curtis...");
-	System.out.println(curtis);
-
-	for( int i = 0; i < curtis._data.length; i++ ) {
-	    curtis.add(i,i*2);
-	}
-
-	System.out.println("Printing populated SuperArray curtis...");
-	System.out.println(curtis);
-
-	System.out.println("testing get()...");
-	for( int i = 0; i < curtis._size; i++ ) {
-	    System.out.print( "item at index " + i + ":\t" );
-	    System.out.println( curtis.get(i) );
-	}
-	SuperArray bayle = new SuperArray();
-	System.out.println("Printing empty bayle");
-	System.out.println(bayle);
-	for (int i = 0; i < bayle._data.length; i++){
-	    bayle.add(i * 3);
-	}
-	System.out.println("Printing numberified bayle...");
-	System.out.println(bayle);
-	System.out.println("Removing 5th element");
-	bayle.remove(4);
-	System.out.println(bayle);
-	System.out.println(bayle.size());
-	*/
-
 	//testing for interface over implementation
 	ListInt daemon = new SuperArray();
 
@@ -175,7 +125,5 @@ public class SuperArray implements ListInt {
 	daemon.remove(8);
 	System.out.println(daemon);
 	System.out.println(daemon.size());
-
-
     }
 }
